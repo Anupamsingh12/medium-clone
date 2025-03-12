@@ -40,7 +40,7 @@ const CommentCard = ({ index, leftVal, commentData }) => {
       hideReplies();
 
       axios
-        .post(`${import.meta.env.VITE_BASE_URL}/blog/reply`, { _id, skip })
+        .post(`${"https://medium-ix5b.onrender.com"}/blog/reply`, { _id, skip })
         .then(({ data: { replies } }) => {
           // commentData.isReplyLoaded = true;
           dispatch(setIsReplyLoaded({ index, isLoaded: true }));

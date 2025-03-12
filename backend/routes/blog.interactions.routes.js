@@ -23,6 +23,6 @@ blogInteractionRouter.post("/delete", Auth, deleteBlog);
 
 export default blogInteractionRouter;
 
-// Like the blog `${import.meta.env.VITE_BASE_URL}/blog/like`
+// Like the blog `${"https://medium-ix5b.onrender.com"}/blog/like`
 // Checking if the user has liked that blog - /isLiked
-// `${import.meta.env.VITE_BASE_URL}/blog/comment`
+// `${"https://medium-ix5b.onrender.com"}/blog/comment`

@@ -36,7 +36,7 @@ const ChangePwdPage = () => {
 
     axios
       .post(
-        `${import.meta.env.VITE_BASE_URL}/settings/change-password`,
+        `${"https://medium-ix5b.onrender.com"}/settings/change-password`,
         formData,
         {
           headers: {

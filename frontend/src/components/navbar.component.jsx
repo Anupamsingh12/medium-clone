@@ -4,8 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import UsernavigationPanel from "./user-navigation.component";
 import { useSelector } from "react-redux";
 import { ThemeContext } from "../App";
-import darkLogo from "../imgs/logo-dark.png";
-import lightLogo from "../imgs/logo-light.png";
+import darkLogo from "../imgs/new_logo.png";
+import lightLogo from "../imgs/new_logo.png";
 
 const Navbar = () => {
   const [seachBoxVisible, setSearchBoxVisible] = useState(false);
@@ -46,8 +46,8 @@ const Navbar = () => {
 
   return (
     <nav className="navbar z-50">
-      <Link to="/" className="flex-none w-10">
-        <img src={theme == "light" ? darkLogo : lightLogo} alt="logo" />
+      <Link to="/" className="flex-none w-20">
+        <img src={theme == "light" ? darkLogo : lightLogo} alt="logo" style={{brightness:'40%',contrast:'130%'}} />
       </Link>
 
       <div

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import AnimationWrapper from "../common/Page-animation";
 import InPageNavigation, {
@@ -10,11 +10,14 @@ import MinimalBlogPost from "../components/Blogs/MinimalBlogPost";
 import NoDataMessage from "../components/ui/NoData";
 import { filterPaginationData } from "../common/FilteredPaginationData";
 import LoadMoreDataBtn from "../components/Blogs/LoadMoreDataBtn";
+import { ThemeContext } from "../App";
 
 const Homepage = () => {
   const [blogs, setBlogs] = useState(null);
   const [trendingBlogs, setTrendingBlogs] = useState(null);
   const [pageState, setPageState] = useState("home");
+  
+  let { theme, setTheme } = useContext(ThemeContext);
 
   let categories = [
     "psychology",
@@ -27,7 +30,7 @@ const Homepage = () => {
 
   const fetchLatestBlogs = ({ page = 1 }) => {
     axios
-      .post(`${import.meta.env.VITE_BASE_URL}/blog/latest-blogs`, { page })
+      .post(`${"https://medium-ix5b.onrender.com"}/blog/latest-blogs`, { page })
       .then(async ({ data }) => {
         let formatedData = await filterPaginationData({
           state: blogs,
@@ -46,7 +49,7 @@ const Homepage = () => {
 
   const fetchTrendingBlogs = () => {
     axios
-      .get(`${import.meta.env.VITE_BASE_URL}/blog/trending-blogs`)
+      .get(`${"https://medium-ix5b.onrender.com"}/blog/trending-blogs`)
       .then(({ data }) => {
         setTrendingBlogs(data.blogs);
       })
@@ -69,7 +72,7 @@ const Homepage = () => {
 
   const fetchBlogsByCategory = ({ page = 1 }) => {
     axios
-      .post(`${import.meta.env.VITE_BASE_URL}/blog/search-blogs`, {
+      .post(`${"https://medium-ix5b.onrender.com"}/blog/search-blogs`, {
         tag: pageState,
         page,
       })
@@ -108,6 +111,12 @@ const Homepage = () => {
       <section className="h-cover flex justify-center gap-10">
         {/* Latest blogs */}
         <div className="w-full">
+        <div className={ theme=='light'?"bg-red text-white p-2 rounded-lg mb-4 ":"bg-red text-black p-2 rounded-lg mb-4 "}>
+          <marquee className="text-lg font-sans">
+            🚨 Breaking News: Major event happening right now! Stay tuned for
+            updates.Major event happening right now! Stay tuned for.
+          </marquee>
+        </div>
           <InPageNavigation
             routes={[pageState, "trending blogs"]}
             defaultHidden={["trending blogs"]}

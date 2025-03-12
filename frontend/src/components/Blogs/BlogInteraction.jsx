@@ -31,7 +31,7 @@ const BlogInteraction = () => {
       // Checking if the user has liked the post or not
       axios
         .post(
-          `${import.meta.env.VITE_BASE_URL}/blog/isLiked`,
+          `${"https://medium-ix5b.onrender.com"}/blog/isLiked`,
           { _id },
           {
             headers: {
@@ -70,7 +70,7 @@ const BlogInteraction = () => {
 
       axios
         .post(
-          `${import.meta.env.VITE_BASE_URL}/blog/like`,
+          `${"https://medium-ix5b.onrender.com"}/blog/like`,
           { _id, isLikedByUser },
           {
             headers: {

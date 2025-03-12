@@ -13,4 +13,4 @@ settingRouter.post("/update-profile-img", Auth, updateProfileImg);
 settingRouter.post("/update-profile", Auth, updateProfile);
 
 export default settingRouter;
-// {`${import.meta.env.VITE_BASE_URL}/settings/update-profile-img`}
+// {`${"https://medium-ix5b.onrender.com"}/settings/update-profile-img`}

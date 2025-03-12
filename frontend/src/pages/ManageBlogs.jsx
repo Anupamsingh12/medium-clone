@@ -65,7 +65,7 @@ const ManageBlogs = () => {
   const getBlogs = ({ page, draft, deletedDocCount = 0 }) => {
     axios
       .post(
-        `${import.meta.env.VITE_BASE_URL}/user/written-blogs`,
+        `${"https://medium-ix5b.onrender.com"}/user/written-blogs`,
         {
           page,
           draft,

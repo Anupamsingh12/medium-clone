@@ -8,6 +8,7 @@ import Loader from "../components/ui/Loader";
 import InputBox from "../components/input.component";
 import { Navigate } from "react-router-dom";
 import { updateProfileImg, updateUsername } from "../redux/authSlice";
+import config from "../config";
 
 const profileDataStructure = {
   personal_info: {
@@ -80,7 +81,7 @@ const EditProfilePage = () => {
 
     axios
       .post(
-        `${"https://medium-ix5b.onrender.com"}/settings/update-profile`,
+        `${config.api}/settings/update-profile`,
         {
           username,
           bio,
@@ -156,7 +157,7 @@ const EditProfilePage = () => {
     let x = toast.loading("Uploading Image!");
     axios
       .post(
-        `${"https://medium-ix5b.onrender.com"}/settings/update-profile-img`,
+        `${config.api}/settings/update-profile-img`,
         {
           img: avatar,
         },
@@ -183,7 +184,7 @@ const EditProfilePage = () => {
   useEffect(() => {
     if (access_token) {
       axios
-        .post(`${"https://medium-ix5b.onrender.com"}/user/profile`, {
+        .post(`${config.api}/user/profile`, {
           username: user.username,
         })
         .then(({ data }) => {

@@ -9,7 +9,7 @@ let emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
 export const signup = async (req, res) => {
   const { fullname, email, password } = req.body;
-
+  console.log("====================================");
   if (fullname.length < 3) {
     return res
       .status(403)
@@ -32,7 +32,6 @@ export const signup = async (req, res) => {
 
   try {
     const existingUser = await User.findOne({ "personal_info.email": email });
-
     if (existingUser) {
       return res.status(500).json({ error: "Email already Exists" });
     }
@@ -95,46 +94,47 @@ export const signin = async (req, res) => {
   }
 };
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccountKey),
-});
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccountKey),
+// });
 
 export const googleAuth = async (req, res) => {
   try {
-    const { access_token } = req.body;
+    // const { access_token } = req.body;
 
-    const decodedUser = await getAuth().verifyIdToken(access_token);
-    let { email, name, picture } = decodedUser;
-    picture = picture.replace("s96-c", "s384-c");
+    // const decodedUser = await getAuth().verifyIdToken(access_token);
+    // let { email, name, picture } = decodedUser;
+    // picture = picture.replace("s96-c", "s384-c");
 
-    let user = await User.findOne({ "personal_info.email": email }).select(
-      "personal_info.fullname personal_info.username personal_info.profile_img personal_info.google_auth"
-    );
+    // let user = await User.findOne({ "personal_info.email": email }).select(
+    //   "personal_info.fullname personal_info.username personal_info.profile_img personal_info.google_auth"
+    // );
 
-    if (user) {
-      if (!user.personal_info.google_auth) {
-        // Update user document to set google_auth to true
-        await User.updateOne(
-          { "personal_info.email": email },
-          { "personal_info.google_auth": true }
-        );
-      }
-    } else {
-      let username = await generateUsername(email);
-      user = new User({
-        personal_info: {
-          fullname: name,
-          email,
-          profile_img: picture,
-          username,
-        },
-        google_auth: true, // Setingt google_auth to true here
-      });
+    // if (user) {
+    //   if (!user.personal_info.google_auth) {
+    //     // Update user document to set google_auth to true
+    //     await User.updateOne(
+    //       { "personal_info.email": email },
+    //       { "personal_info.google_auth": true }
+    //     );
+    //   }
+    // } else {
+    //   let username = await generateUsername(email);
+    //   user = new User({
+    //     personal_info: {
+    //       fullname: name,
+    //       email,
+    //       profile_img: picture,
+    //       username,
+    //     },
+    //     google_auth: true, // Setingt google_auth to true here
+    //   });
 
-      await user.save();
-    }
+    //   await user.save();
+    // }
 
-    return res.status(200).json(formatDataToSend(user));
+    // return res.status(200).json(formatDataToSend(user));
+    return res.status(200).json({ message: "Google Auth" });
   } catch (error) {
     return res
       .status(500)

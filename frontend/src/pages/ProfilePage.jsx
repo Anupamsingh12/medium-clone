@@ -11,6 +11,7 @@ import BlogPostCard from "../components/Blogs/BlogPostCard";
 import NoDataMessage from "../components/ui/NoData";
 import LoadMoreDataBtn from "../components/Blogs/LoadMoreDataBtn";
 import PageNotFound from "./404";
+import config from "../config";
 
 export const profileDataStructure = {
   personal_info: {
@@ -51,7 +52,7 @@ const ProfilePage = () => {
 
   const fetchUserProfile = () => {
     axios
-      .post(`${"https://medium-ix5b.onrender.com"}/user/profile`, {
+      .post(`${config.api}/user/profile`, {
         username: profileId,
       })
       .then(({ data: user }) => {
@@ -72,7 +73,7 @@ const ProfilePage = () => {
     user_id = user_id == undefined ? blogs.user_id : user_id;
 
     axios
-      .post(`${"https://medium-ix5b.onrender.com"}/blog/search-blogs`, {
+      .post(`${config.api}/blog/search-blogs`, {
         author: user_id,
         page,
       })

@@ -7,6 +7,7 @@ import {
   setComments,
   setTotalParentCommentsLoaded,
 } from "../../redux/selectedBlogSlice";
+import config from "../../config";
 
 const CommentField = ({
   action,
@@ -93,7 +94,7 @@ const CommentField = ({
     //   });
     axios
       .post(
-        `${"https://medium-ix5b.onrender.com"}/blog/comment`,
+        `${config.api}/blog/comment`,
         { _id, blog_author, comment, replying_to: replyingTo },
         {
           headers: {

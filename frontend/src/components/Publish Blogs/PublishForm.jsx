@@ -12,6 +12,7 @@ import {
 } from "../../redux/blogEditorSlice";
 import Tag from "../ui/Tag";
 import AnimationWrapper from "../../common/Page-animation";
+import config from "../../config";
 
 const PublishForm = () => {
   const access_token = useSelector((store) => store.auth.access_token);
@@ -90,7 +91,7 @@ const PublishForm = () => {
 
     axios
       .post(
-        `${"https://medium-ix5b.onrender.com"}/blog/create`,
+        `${config.api}/blog/create`,
         { ...blogObj, id: blog_id },
         {
           headers: {

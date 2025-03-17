@@ -14,6 +14,7 @@ import {
   ManageDraftBlogPost,
   ManagePublishedBlogCard,
 } from "../components/Blogs/ManagePublishedBlogCard";
+import config from "../config";
 
 const ManageBlogs = () => {
   const access_token = useSelector((store) => store.auth.access_token);
@@ -22,8 +23,6 @@ const ManageBlogs = () => {
   // const [blogs, setBlogs] = useState(null);
   // const [drafts, setDrafts] = useState(null);
 
-  console.log("blogs", blogs);
-  console.log("drafts", drafts);
 
   const dispatch = useDispatch();
   const [query, setQuery] = useState("");
@@ -45,7 +44,7 @@ const ManageBlogs = () => {
       // Creating the first time
       await axios
         .post(
-          import.meta.env.VITE_BASE_URL + countRoute,
+          config.api + countRoute,
 
           data_to_send,
           {
@@ -65,7 +64,7 @@ const ManageBlogs = () => {
   const getBlogs = ({ page, draft, deletedDocCount = 0 }) => {
     axios
       .post(
-        `${"https://medium-ix5b.onrender.com"}/user/written-blogs`,
+        `${config.api}/user/written-blogs`,
         {
           page,
           draft,
@@ -105,6 +104,7 @@ const ManageBlogs = () => {
   };
 
   useEffect(() => {
+    console.log("useEffect",blogs==null,drafts==null);
     if (access_token) {
       if (blogs == null) {
         getBlogs({ page: 1, draft: false });

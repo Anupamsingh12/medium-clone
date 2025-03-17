@@ -11,6 +11,7 @@ import NoDataMessage from "../../components/ui/NoData";
 import axios from "axios";
 import AnimationWrapper from "../../common/Page-animation";
 import CommentCard from "./CommentCard";
+import config from "../../config";
 
 export const fetchComments = async ({
   skip = 0,
@@ -20,7 +21,7 @@ export const fetchComments = async ({
 }) => {
   let res;
   await axios
-    .post(`${"https://medium-ix5b.onrender.com"}/blog/comment/get`, {
+    .post(`${config.api}/blog/comment/get`, {
       blog_id,
       skip,
     })

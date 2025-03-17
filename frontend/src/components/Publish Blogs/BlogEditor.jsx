@@ -20,6 +20,7 @@ import darkLogo from "../../imgs/logo-dark.png";
 import lightBanner from "../../imgs/blog banner light.png";
 import darkBanner from "../../imgs/blog banner dark.png";
 import { ThemeContext } from "../../App";
+import config from "../../config";
 
 const BlogEditor = () => {
   const dispatch = useDispatch();
@@ -53,34 +54,15 @@ const BlogEditor = () => {
       let x = toast.loading("Uploading image...");
       const file = event.target.files[0];
       const formData = new FormData();
-      formData.append("file", file);
-      formData.append("upload_preset", "blogapp");
-      formData.append("cloud_name", import.meta.env.VITE_CLOUDINARY_CLOUD_NAME);
-
-      fetch(
-        `https://api.cloudinary.com/v1_1/${
-          import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
-        }/image/upload`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          dispatch(setBanner(data.secure_url));
-          console.log(data.secure_url);
-          toast.dismiss(x);
-          toast.success("Image uploaded!");
-        });
-
-      // const response = await axios.post("http://localhost:3000/url", formData, {
-      //   headers: {
-      //     "Content-Type": "multipart/form-data",
-      //   },
-      // });
-
-      // console.log("Upload successful:", response.data);
+      formData.append("image", file);
+      const response = await axios.post("http://localhost:5000/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      dispatch(setBanner(response?.data?.url));
+      toast.dismiss(x);
+      toast.success("Image uploaded!");
       // Handle response data as needed
     } catch (error) {
       console.error("Error uploading image:", error);
@@ -153,7 +135,7 @@ const BlogEditor = () => {
 
         axios
           .post(
-            `${"https://medium-ix5b.onrender.com"}/blog/create`,
+            `${config.api}/blog/create`,
             { ...blogObj, id: blog_id },
             {
               headers: {

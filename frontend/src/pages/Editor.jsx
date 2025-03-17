@@ -13,6 +13,7 @@ import {
   setTags,
   setTile,
 } from "../redux/blogEditorSlice";
+import config from "../config";
 
 export const editorContext = createContext({});
 
@@ -35,7 +36,7 @@ const Editor = () => {
       return;
     }
     axios
-      .post(`${"https://medium-ix5b.onrender.com"}/blog`, {
+      .post(`${config.api}/blog`, {
         blog_id,
         draft: true,
         mode: "edit",

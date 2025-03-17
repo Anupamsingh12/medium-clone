@@ -17,6 +17,7 @@ import BlogContent from "../components/Blogs/BlogContent";
 import CommentsContainer, {
   fetchComments,
 } from "../components/Comments/CommentsContainer ";
+import config from "../config";
 
 const BlogPage = () => {
   const { id: blog_id } = useParams();
@@ -42,7 +43,7 @@ const BlogPage = () => {
 
   const fetchBlog = () => {
     axios
-      .post(`${"https://medium-ix5b.onrender.com"}/blog`, { blog_id })
+      .post(`${config.api}/blog`, { blog_id })
       .then(async ({ data: { blog } }) => {
         const fetchedTags = blog.tags; // Storing the tags in a separate variable
         // Fetcing comments;
@@ -51,7 +52,7 @@ const BlogPage = () => {
 
         // Fetching similar blogs
         axios
-          .post(`${"https://medium-ix5b.onrender.com"}/blog/search-blogs`, {
+          .post(`${config.api}/blog/search-blogs`, {
             tag: fetchedTags[0], // Accessing the first tag
             limit: 6,
             eliminate_blog: blog_id,
@@ -129,7 +130,7 @@ const BlogPage = () => {
 
             {/* Blog content here */}
             <div className="my-12 font-gelasio blog-page-content">
-              {content[0].blocks.map((block, i) => {
+              {content[0]?.blocks?.map((block, i) => {
                 return (
                   <div key={i} className="my-4 md:my-8">
                     <BlogContent block={block} />

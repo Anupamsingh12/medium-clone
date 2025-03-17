@@ -1,4 +1,5 @@
 import axios from "axios";
+import config from "../config";
 
 export const filterPaginationData = async ({
   create_new_arr = false,
@@ -16,7 +17,7 @@ export const filterPaginationData = async ({
   } else {
     // Creating the first time
     await axios
-      .post("https://medium-ix5b.onrender.com" + countRoute, data_to_send)
+      .post(config.api + countRoute, data_to_send)
       .then(({ data: { totalDocs } }) => {
         obj = { results: data, page: 1, totalDocs };
       })

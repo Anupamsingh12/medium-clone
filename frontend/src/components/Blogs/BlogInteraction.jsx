@@ -9,6 +9,7 @@ import {
   toggleCommentWrapper,
   toggleLikedByUser,
 } from "../../redux/selectedBlogSlice";
+import config from "../../config";
 
 const BlogInteraction = () => {
   const user = useSelector((store) => store.auth.user);
@@ -31,7 +32,7 @@ const BlogInteraction = () => {
       // Checking if the user has liked the post or not
       axios
         .post(
-          `${"https://medium-ix5b.onrender.com"}/blog/isLiked`,
+          `${config.api}/blog/isLiked`,
           { _id },
           {
             headers: {
@@ -70,7 +71,7 @@ const BlogInteraction = () => {
 
       axios
         .post(
-          `${"https://medium-ix5b.onrender.com"}/blog/like`,
+          `${config.api}/blog/like`,
           { _id, isLikedByUser },
           {
             headers: {

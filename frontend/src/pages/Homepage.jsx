@@ -11,6 +11,9 @@ import NoDataMessage from "../components/ui/NoData";
 import { filterPaginationData } from "../common/FilteredPaginationData";
 import LoadMoreDataBtn from "../components/Blogs/LoadMoreDataBtn";
 import { ThemeContext } from "../App";
+import Categories from "../components/Home Page/Categories";
+import Banner from "../components/Home Page/banner";
+import config from "../config";
 
 const Homepage = () => {
   const [blogs, setBlogs] = useState(null);
@@ -30,7 +33,7 @@ const Homepage = () => {
 
   const fetchLatestBlogs = ({ page = 1 }) => {
     axios
-      .post(`${"https://medium-ix5b.onrender.com"}/blog/latest-blogs`, { page })
+      .post(`${config.api}/blog/latest-blogs`, { page })
       .then(async ({ data }) => {
         let formatedData = await filterPaginationData({
           state: blogs,
@@ -49,7 +52,7 @@ const Homepage = () => {
 
   const fetchTrendingBlogs = () => {
     axios
-      .get(`${"https://medium-ix5b.onrender.com"}/blog/trending-blogs`)
+      .get(`${config.api}/blog/trending-blogs`)
       .then(({ data }) => {
         setTrendingBlogs(data.blogs);
       })
@@ -72,7 +75,7 @@ const Homepage = () => {
 
   const fetchBlogsByCategory = ({ page = 1 }) => {
     axios
-      .post(`${"https://medium-ix5b.onrender.com"}/blog/search-blogs`, {
+      .post(`${config.api}/blog/search-blogs`, {
         tag: pageState,
         page,
       })
@@ -109,14 +112,9 @@ const Homepage = () => {
   return (
     <AnimationWrapper>
       <section className="h-cover flex justify-center gap-10">
-        {/* Latest blogs */}
         <div className="w-full">
-        <div className={ theme=='light'?"bg-red text-white p-2 rounded-lg mb-4 ":"bg-red text-black p-2 rounded-lg mb-4 "}>
-          <marquee className="text-lg font-sans">
-            🚨 Breaking News: Major event happening right now! Stay tuned for
-            updates.Major event happening right now! Stay tuned for.
-          </marquee>
-        </div>
+          <Categories />
+          <Banner theme={theme} />
           <InPageNavigation
             routes={[pageState, "trending blogs"]}
             defaultHidden={["trending blogs"]}

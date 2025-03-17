@@ -8,6 +8,7 @@ import axios from "axios";
 import { authWithGoogle } from "../common/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { authenticate } from "../redux/authSlice";
+import config from "../config";
 
 const UserAuthForm = ({ type }) => {
   const [fullname, setFullname] = useState("");
@@ -23,7 +24,7 @@ const UserAuthForm = ({ type }) => {
   const signup = (fullname, email, password) => {
     // console.log(email, password, fullname);
     axios
-      .post(`${"https://medium-ix5b.onrender.com"}/auth/signup`, {
+      .post(`${config.api}/auth/signup`, {
         fullname,
         email,
         password,
@@ -39,7 +40,7 @@ const UserAuthForm = ({ type }) => {
 
   const signin = (email, password) => {
     axios
-      .post(`${"https://medium-ix5b.onrender.com"}/auth/signin`, {
+      .post(`${config.api}/auth/signin`, {
         email,
         password,
       })
@@ -57,7 +58,7 @@ const UserAuthForm = ({ type }) => {
     authWithGoogle()
       .then((user) => {
         axios
-          .post(`${"https://medium-ix5b.onrender.com"}/auth/google`, {
+          .post(`${config.api}/auth/google`, {
             access_token: user.accessToken,
           })
           .then(({ data }) => {

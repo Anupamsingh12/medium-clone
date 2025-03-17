@@ -11,6 +11,7 @@ import {
   updateComments,
 } from "../../redux/selectedBlogSlice";
 import axios from "axios";
+import config from "../../config";
 
 const CommentCard = ({ index, leftVal, commentData }) => {
   const access_token = useSelector((store) => store.auth.access_token);
@@ -40,7 +41,7 @@ const CommentCard = ({ index, leftVal, commentData }) => {
       hideReplies();
 
       axios
-        .post(`${"https://medium-ix5b.onrender.com"}/blog/reply`, { _id, skip })
+        .post(`${config.api}/blog/reply`, { _id, skip })
         .then(({ data: { replies } }) => {
           // commentData.isReplyLoaded = true;
           dispatch(setIsReplyLoaded({ index, isLoaded: true }));

@@ -10,6 +10,7 @@ import LoadMoreDataBtn from "../components/Blogs/LoadMoreDataBtn";
 import axios from "axios";
 import { filterPaginationData } from "../common/FilteredPaginationData";
 import UserCard from "../components/Users/UserCard";
+import config from "../config";
 
 const SearchPage = () => {
   const { query } = useParams();
@@ -18,7 +19,7 @@ const SearchPage = () => {
 
   const searchBlogs = ({ page = 1, create_new_arr = false }) => {
     axios
-      .post(`${"https://medium-ix5b.onrender.com"}/blog/search-blogs`, {
+      .post(`${config.api}/blog/search-blogs`, {
         query,
         page,
       })
@@ -53,7 +54,7 @@ const SearchPage = () => {
 
   const fetchUsers = () => {
     axios
-      .post(`${"https://medium-ix5b.onrender.com"}/user/search`, { query })
+      .post(`${config.api}/user/search`, { query })
       .then(({ data: { users } }) => {
         console.log(users);
         setUsers(users);

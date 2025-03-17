@@ -4,6 +4,7 @@ import InputBox from "../components/input.component";
 import { Toaster, toast } from "react-hot-toast";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import config from "../config";
 
 const ChangePwdPage = () => {
   const access_token = useSelector((store) => store.auth.access_token);
@@ -36,7 +37,7 @@ const ChangePwdPage = () => {
 
     axios
       .post(
-        `${"https://medium-ix5b.onrender.com"}/settings/change-password`,
+        `${config.api}/settings/change-password`,
         formData,
         {
           headers: {

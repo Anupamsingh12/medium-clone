@@ -45,9 +45,9 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar z-50">
+    <nav className="navbar z-50 " style={{background:'linear-gradient(135deg, #eb4034, #9b2d2a)'}}>
       <Link to="/" className="flex-none w-20">
-        <img src={theme == "light" ? darkLogo : lightLogo} alt="logo" style={{brightness:'40%',contrast:'130%'}} />
+        <img src={theme == "light" ? darkLogo : lightLogo} alt="logo" style={theme == "light" ? {background:'white', borderRadius:'10px'} : {background:'white', borderRadius:'10px'}} />
       </Link>
 
       <div
@@ -79,7 +79,7 @@ const Navbar = () => {
 
         <button
           onClick={changeTheme}
-          className="w-12 h-12 rounded-full bg-grey relative hover:bg-black/10"
+          className="w-12 h-12 rounded-full bg-white relative hover:bg-white"
         >
           <i
             className={`fi fi-rr-${
